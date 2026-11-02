@@ -1,0 +1,75 @@
+﻿<Window x:Class="Neuro_Link.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Neuro_Link"
+        mc:Ignorable="d"
+        Title="NEURO-LINK: Протокол забвения"
+        Width="1920" Height="1080"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="Black"
+        FontFamily="Consolas">
+    <Grid>
+        <!-- Анимированный неоновый фон -->
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#0a0015" Offset="0"/>
+                <GradientStop Color="#1a0033" Offset="0.5"/>
+                <GradientStop Color="#000000" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <!-- Сетка-перспектива на фоне -->
+        <Canvas x:Name="BackgroundCanvas" Opacity="0.3"/>
+
+        <!-- Основной контейнер сцен -->
+        <Grid x:Name="SceneHost" Margin="60">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель: имя персонажа, глитч-эффект -->
+            <Border Grid.Row="0" Background="#110022" BorderBrush="#ff00ff"
+                    BorderThickness="2" CornerRadius="10" Padding="20" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="SpeakerName" Text="..." 
+                               Foreground="#00ffff" FontSize="36" FontWeight="Bold"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Content="💾 Сохранить" Click="Save_Click"
+                                Background="#220044" Foreground="#00ffff"
+                                BorderBrush="#ff00ff" FontSize="18" Padding="15,8" Margin="5,0"/>
+                        <Button Content="📂 Загрузить" Click="Load_Click"
+                                Background="#220044" Foreground="#00ffff"
+                                BorderBrush="#ff00ff" FontSize="18" Padding="15,8" Margin="5,0"/>
+                        <Button Content="🔊 Музыка" Click="MusicToggle_Click"
+                                Background="#220044" Foreground="#00ffff"
+                                BorderBrush="#ff00ff" FontSize="18" Padding="15,8" Margin="5,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Центральная сцена -->
+            <Border Grid.Row="1" Background="#0a0015" BorderBrush="#ff00ff"
+                    BorderThickness="2" CornerRadius="10" Padding="30">
+                <Grid x:Name="SceneContent"/>
+            </Border>
+
+            <!-- Нижняя панель: диалог / выборы -->
+            <Border Grid.Row="2" Background="#110022" BorderBrush="#00ffff"
+                    BorderThickness="2" CornerRadius="10" Padding="20" Margin="0,20,0,0">
+                <StackPanel x:Name="DialoguePanel"/>
+            </Border>
+        </Grid>
+
+        <!-- Оверлей глитча -->
+        <Canvas x:Name="GlitchOverlay" IsHitTestVisible="False"/>
+    </Grid>
+</Window>
